@@ -842,13 +842,13 @@ data.forEach(car => {
                 <p>${car.year},${car.engine}L, ${car.odometer} ${car.odometerUnit} </p>
                 <p class="text-gray-400">Bakı, bugün 18:26</p>
             </div>
-        </div>`;
-});
+        </div>`
+})
 document.getElementById('dropdownNavbarLink').addEventListener('click', function () {
-    var dropdown = document.getElementById('dropdownNavbar');
-    dropdown.classList.toggle('hidden');
-});
+    var dropdown = document.getElementById('dropdownNavbar')
+    dropdown.classList.toggle('hidden')
+})
 document.getElementById('dropdownNavbarLink2').addEventListener('click', function () {
-    var dropdown = document.getElementById('dropdownNavbar2');
-    dropdown.classList.toggle('hidden');
-});
+    var dropdown = document.getElementById('dropdownNavbar2')
+    dropdown.classList.toggle('hidden')
+})

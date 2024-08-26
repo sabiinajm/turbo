@@ -18,7 +18,7 @@
             <div class="flex justify-between sm:max-w-screen-lg mx-auto p-4 sm:p-2 ">
                 <div class="flex space-x-3 ">
                     <a href="#"
-                        class=" sm:text-sm sm:normal-case sm:font-normal text-lg uppercase font-bold text-[#ca1016]">Turbo.az</a>
+                        class="sm:text-sm sm:normal-case sm:font-normal text-lg uppercase font-bold text-[#ca1016]">Turbo.az</a>
                     <hr class="h-7 w-0.5 bg-gray-200 sm:hidden" />
                     <a href="#"
                         class="sm:text-sm sm:normal-case sm:font-normal text-lg uppercase font-bold text-gray-500 text-grey hover:underline hover:text-[#ca1016]">Bina.az</a>
@@ -142,27 +142,28 @@
         <!-- mobile main -->
         <div class="sm:hidden flex flex-col justify-end">
             <div id="filters" class="mt-4">
-                <div class="relative w-11/12 h-28 mx-auto bg-white rounded-xl flex flex-col px-2">
+                <div class="relative w-11/12 mx-auto bg-white rounded-xl flex flex-col px-2">
                     <div class="flex items-center">
                         <i class="fa-solid fa-car p-2 text-[#ca1016]"></i>
-                        <select id="allBrands" class=" block w-full py-4 focus:outline-none">
+                        <select class=" block w-full h-14 focus:outline-none">
                             <option>Bütün Markalar</option>
                         </select>
                     </div>
                     <hr class="w-11/12 mx-auto" />
                     <div class="flex items-center">
                         <i class="fa-solid fa-sliders p-2 text-[#ca1016]"></i>
-                        <a id="allBrands" class=" block w-full py-4 focus:outline-none">Bütün Markalar
-                        </a>
+                        <div class="flex items-center pl-1 w-full h-14 focus:outline-none">
+                            <a>Bütün Markalar</a>
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center w-11/12 h-14 mx-auto bg-white rounded-xl px-2 mt-4">
-                    <select id="allBrands" class=" block w-full py-4 focus:outline-none">
+                    <select class=" block h-14 w-full focus:outline-none">
                         <option>Moto</option>
                     </select>
                 </div>
                 <div class="flex items-center w-11/12 h-14 mx-auto bg-white rounded-xl px-2 mt-4 relative">
-                    <select id="allBrands" class=" block w-full py-4 focus:outline-none">
+                    <select class=" block w-full h-14 focus:outline-none">
                         <option>Avtokatalog</option>
                     </select>
                     <span
