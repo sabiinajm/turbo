@@ -845,9 +845,10 @@ function displayCars(cars) {
     cars.forEach(car => {
         kod += ` 
             <div class="w-48 border basis-1/2 sm:basis-1/3 lg:basis-1/5 border-gray-200 rounded-lg overflow-hidden shadow-lg mx-1 mb-8">
-                <div class="img-car">
-                    <img src="${car.images[0]}" class="h-48 w-full object-cover" alt="${car.brand}">
-                </div>
+                <div class="img-car relative">
+                    <img src="${car.images[0]}" class=" h-48 w-full object-cover" alt="${car.brand}">
+                    <i class="fa-solid fa-heart absolute top-2 right-3 opacity-40 hover:text-[#ca1016] hover:opacity-100 hover:scale-125 text-lg"></i>
+                    </div>
                 <div class="info pb-2 pl-2">
                     <h2 class="font-bold text-lg">${car.price} ${car.currency}</h2>
                     <p>${car.brand} ${car.model}</p>
@@ -868,6 +869,7 @@ const currencySet = new Set()
 const banSet = new Set()
 
 const markaSelect = document.getElementById("markaSelect")
+const markaSelMobile = document.getElementById("markaSelMobile")
 const modelSelect = document.getElementById("modelSelect")
 const citySelect = document.getElementById("citySelect")
 const currencySelect = document.getElementById("currencySelect")
@@ -896,6 +898,7 @@ function addOptionsToSelect(selectElement, optionsArray, placeholder) {
 
 function addBrandOp() {
     addOptionsToSelect(markaSelect, marka, 'Brand')
+    addOptionsToSelect(markaSelMobile, marka, 'Brand')
     addOptionsToSelect(modelSelect, model, 'Model')
     addOptionsToSelect(citySelect, city, 'City')
     addOptionsToSelect(currencySelect, currency, currency[0])
@@ -906,6 +909,7 @@ addBrandOp()
 
 function filterCars() {
     let selectedMarka = markaSelect.value
+    let selectedMarkaMob = markaSelMobile.value
     let selectedModel = modelSelect.value
     let selectedCity = citySelect.value
     let selectedCurrency = currencySelect.value
@@ -915,6 +919,9 @@ function filterCars() {
 
     if (selectedMarka && selectedMarka !== 'Brand') {
         filteredCars = filteredCars.filter(car => car.brand === selectedMarka)
+    }
+    if (selectedMarkaMob && selectedMarkaMob !== 'Brand') {
+        filteredCars = filteredCars.filter(car => car.brand === selectedMarkaMob)
     }
     if (selectedModel && selectedModel !== 'Model') {
         filteredCars = filteredCars.filter(car => car.model === selectedModel)

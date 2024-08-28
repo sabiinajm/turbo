@@ -112,18 +112,18 @@
                     class="text-white bg-[#7ed321] hover:bg-[#85c01d] font-medium rounded-lg text-sm px-4 py-2 mr-2 ">Yeni
                     elan</button>
             </div>
-            <div class="fixed inset-x-0 bottom-0 bg-white border-t border-gray-200 sm:hidden">
+            <div class="fixed z-10 inset-x-0 bottom-0 bg-white border-t border-gray-200 sm:hidden">
                 <div class="flex justify-between items-center p-4">
                     <a href="#" class="flex flex-col items-center text-gray-600 hover:text-[#ca1016]">
                         <i class="fa-solid fa-house"></i>
-                        <span class="text-xs">Əsas</span>
+                        <span class="text-xs" onclick="clearFilter()">Əsas</span>
                     </a>
                     <a href="#" class="flex flex-col items-center text-gray-600 hover:text-[#ca1016]">
                         <i class="fa-solid fa-heart"></i>
                         <span class="text-xs">Seçilmişlər</span>
                     </a>
                     <a href="#" class="flex flex-col items-center text-gray-600 hover:text-[#ca1016]">
-                        <i class="fa-solid fa-circle-plus text-5xl absolute top-[-20px] text-[#ca1016] "></i>
+                        <i class="fa-solid fa-circle-plus text-5xl absolute top-[-16px] text-[#ca1016] "></i>
                         <span class="text-xs pt-4">Yeni elan</span>
                     </a>
                     <a href="#" class="flex flex-col items-center text-gray-600 hover:text-[#ca1016]">
@@ -145,8 +145,7 @@
                 <div class="relative w-11/12 mx-auto bg-white rounded-xl flex flex-col px-2">
                     <div class="flex items-center">
                         <i class="fa-solid fa-car p-2 text-[#ca1016]"></i>
-                        <select class="bg-white block w-full h-14 focus:outline-none">
-                            <option>Bütün Markalar</option>
+                        <select id="markaSelMobile" onchange="filterCars()" class="bg-white block w-full h-14 focus:outline-none">
                         </select>
                     </div>
                     <hr class="w-11/12 mx-auto" />
