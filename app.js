@@ -1,4 +1,3 @@
-
 const data = [
     {
         id: "1",
@@ -827,28 +826,113 @@ const data = [
         ],
         city: "Mingecevir",
         engine: 1.5,
-    },
+    }
 ]
-const card = document.getElementById('card')
-data.forEach(car => {
-    card.innerHTML += `
-        <div class=" w-48 border border-gray-200 rounded-lg overflow-hidden shadow-lg mx-1 mb-8">
-            <div class="img-car">
-                <img src="${car.images}" class="h-48 w-full object-cover" alt="${car.brand}">
-            </div>
-            <div class="info pb-2 pl-2">
-                <h2 class="font-bold text-lg">${car.price}$</h2>
-                <p>${car.brand} ${car.model}</p>
-                <p>${car.year},${car.engine}L, ${car.odometer} ${car.odometerUnit} </p>
-                <p class="text-gray-400">Bakı, bugün 18:26</p>
-            </div>
-        </div>`
-})
+
 document.getElementById('dropdownNavbarLink').addEventListener('click', function () {
     var dropdown = document.getElementById('dropdownNavbar')
     dropdown.classList.toggle('hidden')
-})
+});
+
 document.getElementById('dropdownNavbarLink2').addEventListener('click', function () {
     var dropdown = document.getElementById('dropdownNavbar2')
     dropdown.classList.toggle('hidden')
-})
+});
+
+const card = document.getElementById('card')
+function displayCars(cars) {
+    let kod = ''
+    cars.forEach(car => {
+        kod += ` 
+            <div class="w-48 border basis-1/2 sm:basis-1/3 lg:basis-1/5 border-gray-200 rounded-lg overflow-hidden shadow-lg mx-1 mb-8">
+                <div class="img-car">
+                    <img src="${car.images[0]}" class="h-48 w-full object-cover" alt="${car.brand}">
+                </div>
+                <div class="info pb-2 pl-2">
+                    <h2 class="font-bold text-lg">${car.price} ${car.currency}</h2>
+                    <p>${car.brand} ${car.model}</p>
+                    <p>${car.year}, ${car.engine}L, ${car.odometer} ${car.odometerUnit}</p>
+                    <p class="text-gray-400">${car.city}, bugün 18:26</p>
+                </div>
+            </div>`
+    })
+    card.innerHTML = kod
+}
+
+displayCars(data)
+
+const brandSet = new Set()
+const modelSet = new Set()
+const citySet = new Set()
+const currencySet = new Set()
+const banSet = new Set()
+
+const markaSelect = document.getElementById("markaSelect")
+const modelSelect = document.getElementById("modelSelect")
+const citySelect = document.getElementById("citySelect")
+const currencySelect = document.getElementById("currencySelect")
+const banSelect = document.getElementById("banSelect")
+
+data.forEach(car => {
+    brandSet.add(car.brand)
+    modelSet.add(car.model)
+    citySet.add(car.city)
+    currencySet.add(car.currency)
+    banSet.add(car.banType)
+});
+
+const marka = Array.from(brandSet)
+const model = Array.from(modelSet)
+const city = Array.from(citySet)
+const currency = Array.from(currencySet)
+const ban = Array.from(banSet)
+
+function addOptionsToSelect(selectElement, optionsArray, placeholder) {
+    selectElement.innerHTML = `<option disabled selected>${placeholder}</option>`
+    optionsArray.forEach(option => {
+        selectElement.innerHTML += `<option>${option}</option>`;
+    });
+}
+
+function addBrandOp() {
+    addOptionsToSelect(markaSelect, marka, 'Brand')
+    addOptionsToSelect(modelSelect, model, 'Model')
+    addOptionsToSelect(citySelect, city, 'City')
+    addOptionsToSelect(currencySelect, currency, currency[0])
+    addOptionsToSelect(banSelect, ban, 'Ban')
+}
+addBrandOp()
+
+
+function filterCars() {
+    let selectedMarka = markaSelect.value
+    let selectedModel = modelSelect.value
+    let selectedCity = citySelect.value
+    let selectedCurrency = currencySelect.value
+    let selectedBan = banSelect.value
+
+    let filteredCars = data
+
+    if (selectedMarka && selectedMarka !== 'Brand') {
+        filteredCars = filteredCars.filter(car => car.brand === selectedMarka)
+    }
+    if (selectedModel && selectedModel !== 'Model') {
+        filteredCars = filteredCars.filter(car => car.model === selectedModel)
+    }
+    if (selectedCity && selectedCity !== 'City') {
+        filteredCars = filteredCars.filter(car => car.city === selectedCity)
+    }
+    if (selectedCurrency && selectedCurrency !== currency[0]) {
+        filteredCars = filteredCars.filter(car => car.currency === selectedCurrency)
+    }
+    if (selectedBan && selectedBan !== 'Ban') {
+        filteredCars = filteredCars.filter(car => car.banType === selectedBan)
+    }
+
+    displayCars(filteredCars);
+}
+
+function clearFilter(){
+    displayCars(data)
+    addBrandOp()
+}
