@@ -839,107 +839,86 @@ document.getElementById('dropdownNavbarLink2').addEventListener('click', functio
     dropdown.classList.toggle('hidden')
 });
 
-const card = document.getElementById('card')
-function displayCars(cars) {
-    let kod = ''
-    cars.forEach(car => {
-        kod += ` 
+const banSelect = document.getElementById("banSelect")
+const currencySelect = document.getElementById("currencySelect")
+const citySelect = document.getElementById("citySelect")
+const modelSelect = document.getElementById("modelSelect")
+const markaSelect = document.getElementById("markaSelect")
+const cards = document.getElementById("cards")
+const qiymet1 = document.getElementById("qiymet1")
+const qiymet2 = document.getElementById("qiymet2")
+
+const banTypes = new Set()
+const currencies = new Set()
+const cities = new Set()
+const models = new Set()
+const brands = new Set()
+
+data.forEach(item => {
+    banTypes.add(item.banType)
+    currencies.add(item.currency)
+    cities.add(item.city)
+    models.add(item.model)
+    brands.add(item.brand)
+})
+
+function populateSelect(selectElement, values) {
+    selectElement.innerHTML = `<option value="">All</option>` + [...values]
+        .map(value => `<option>${value}</option>`)
+        .join('')
+}
+populateSelect(banSelect, banTypes)
+populateSelect(currencySelect, currencies)
+populateSelect(citySelect, cities)
+populateSelect(modelSelect, models)
+populateSelect(markaSelect, brands)
+
+function show() {
+    cards.innerHTML = ""
+    const filteredData = data
+        .filter(item => {
+            if (qiymet1.value || qiymet2.value) {
+                const minPrice = qiymet1.value ? +qiymet1.value : 0
+                const maxPrice = qiymet2.value ? +qiymet2.value : Infinity
+                return item.price >= minPrice && item.price <= maxPrice
+            }
+            return true;
+        })
+        .filter(item => 
+            item.brand.includes(markaSelect.value) &&
+            item.model.includes(modelSelect.value) &&
+            item.banType.includes(banSelect.value) &&
+            item.currency.includes(currencySelect.value) &&
+            item.city.includes(citySelect.value)
+        );
+
+    filteredData.forEach(item => {
+        cards.innerHTML += `
             <div class="w-48 border basis-1/2 sm:basis-1/3 lg:basis-1/5 border-gray-200 rounded-lg overflow-hidden shadow-lg mx-1 mb-8">
                 <div class="img-car relative">
-                    <img src="${car.images[0]}" class=" h-48 w-full object-cover" alt="${car.brand}">
+                    <img src="${item.images[0]}" class="h-48 w-full object-cover" alt="${item.brand}">
                     <i class="fa-solid fa-heart absolute top-2 right-3 opacity-40 hover:text-[#ca1016] hover:opacity-100 hover:scale-125 text-lg"></i>
-                    </div>
-                <div class="info pb-2 pl-2">
-                    <h2 class="font-bold text-lg">${car.price} ${car.currency}</h2>
-                    <p>${car.brand} ${car.model}</p>
-                    <p>${car.year}, ${car.engine}L, ${car.odometer} ${car.odometerUnit}</p>
-                    <p class="text-gray-400">${car.city}, bugün 18:26</p>
                 </div>
-            </div>`
+                <div class="info pb-2 pl-2">
+                    <h2 class="font-bold text-lg">${item.price} AZN</h2>
+                    <p>${item.brand} ${item.model}</p>
+                    <p>${item.year}, ${item.engine}, ${item.odometer} km</p>
+                    <p class="text-gray-400">${item.city}, bugün 18:26</p>
+                </div>
+            </div>
+        `
     })
-    card.innerHTML = kod
 }
 
-displayCars(data)
-
-const brandSet = new Set()
-const modelSet = new Set()
-const citySet = new Set()
-const currencySet = new Set()
-const banSet = new Set()
-
-const markaSelect = document.getElementById("markaSelect")
-const markaSelMobile = document.getElementById("markaSelMobile")
-const modelSelect = document.getElementById("modelSelect")
-const citySelect = document.getElementById("citySelect")
-const currencySelect = document.getElementById("currencySelect")
-const banSelect = document.getElementById("banSelect")
-
-data.forEach(car => {
-    brandSet.add(car.brand)
-    modelSet.add(car.model)
-    citySet.add(car.city)
-    currencySet.add(car.currency)
-    banSet.add(car.banType)
-});
-
-const marka = Array.from(brandSet)
-const model = Array.from(modelSet)
-const city = Array.from(citySet)
-const currency = Array.from(currencySet)
-const ban = Array.from(banSet)
-
-function addOptionsToSelect(selectElement, optionsArray, placeholder) {
-    selectElement.innerHTML = `<option disabled selected>${placeholder}</option>`
-    optionsArray.forEach(option => {
-        selectElement.innerHTML += `<option>${option}</option>`;
-    });
-}
-
-function addBrandOp() {
-    addOptionsToSelect(markaSelect, marka, 'Brand')
-    addOptionsToSelect(markaSelMobile, marka, 'Brand')
-    addOptionsToSelect(modelSelect, model, 'Model')
-    addOptionsToSelect(citySelect, city, 'City')
-    addOptionsToSelect(currencySelect, currency, currency[0])
-    addOptionsToSelect(banSelect, ban, 'Ban')
-}
-addBrandOp()
-
-
-function filterCars() {
-    let selectedMarka = markaSelect.value
-    let selectedMarkaMob = markaSelMobile.value
-    let selectedModel = modelSelect.value
-    let selectedCity = citySelect.value
-    let selectedCurrency = currencySelect.value
-    let selectedBan = banSelect.value
-
-    let filteredCars = data
-
-    if (selectedMarka && selectedMarka !== 'Brand') {
-        filteredCars = filteredCars.filter(car => car.brand === selectedMarka)
-    }
-    if (selectedMarkaMob && selectedMarkaMob !== 'Brand') {
-        filteredCars = filteredCars.filter(car => car.brand === selectedMarkaMob)
-    }
-    if (selectedModel && selectedModel !== 'Model') {
-        filteredCars = filteredCars.filter(car => car.model === selectedModel)
-    }
-    if (selectedCity && selectedCity !== 'City') {
-        filteredCars = filteredCars.filter(car => car.city === selectedCity)
-    }
-    if (selectedCurrency && selectedCurrency !== currency[0]) {
-        filteredCars = filteredCars.filter(car => car.currency === selectedCurrency)
-    }
-    if (selectedBan && selectedBan !== 'Ban') {
-        filteredCars = filteredCars.filter(car => car.banType === selectedBan)
-    }
-
-    displayCars(filteredCars);
-}
+show()
 
 function clearFilter(){
-    displayCars(data)
-    addBrandOp()
+    markaSelect.value = ""
+    modelSelect.value = ""
+    banSelect.value = ""
+    currencySelect.value = ""
+    citySelect.value = ""
+    qiymet1.value = ""
+    qiymet2.value = ""
+    show()
 }

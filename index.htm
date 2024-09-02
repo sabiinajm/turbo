@@ -145,7 +145,7 @@
                 <div class="relative w-11/12 mx-auto bg-white rounded-xl flex flex-col px-2">
                     <div class="flex items-center">
                         <i class="fa-solid fa-car p-2 text-[#ca1016]"></i>
-                        <select id="markaSelMobile" onchange="filterCars()" class="bg-white block w-full h-14 focus:outline-none">
+                        <select id="markaSelMobile" class="bg-white block w-full h-14 focus:outline-none">
                         </select>
                     </div>
                     <hr class="w-11/12 mx-auto" />
@@ -186,10 +186,10 @@
         <!-- desktop main -->
         <div class="hidden sm:flex flex-col pt-9 max-w-screen-lg mx-auto items-center ">
             <div class="flex h-12 container">
-                <select id="markaSelect" onchange="filterCars()"
+                <select id="markaSelect"
                     class="pl-2 border border-gray-300 hover:border-gray-400 w-1/4 ml-4 focus:outline-none rounded-md">
                 </select>
-                <select id="modelSelect" onchange="filterCars()"
+                <select id="modelSelect"
                     class="pl-2 border border-gray-300 hover:border-gray-400 w-1/4  ml-4 focus:outline-none rounded-md">
                 </select>
                 <div class="border border-gray-300 bg-white flex rounded-md ml-4 w-1/4">
@@ -197,19 +197,19 @@
                     <button class=" hover:bg-[#ca1016] hover:text-white w-1/2 border-x border-gray-300">Yeni</button>
                     <button class="hover:bg-[#ca1016] hover:text-white w-1/2">Sürülmüş</button>
                 </div>
-                <select id="citySelect" onchange="filterCars()"
+                <select id="citySelect"
                     class="pl-2 border border-gray-300 hover:border-gray-400 w-1/4 ml-4 focus:outline-none rounded-md">
                 </select>
             </div>
             <div class="flex mt-4 h-12 container">
                 <div class=" flex border border-gray-300 rounded-md w-1/4 ml-4">
-                    <input class="w-1/2 focus:outline-none hover:border hover:border-gray-400 rounded-l-md border-r p-2"
+                    <input id="qiymet1" class="w-1/2 focus:outline-none hover:border hover:border-gray-400 rounded-l-md border-r p-2"
                         placeholder="Qiymət, min" />
-                    <input class="w-1/2 focus:outline-none hover:border hover:border-gray-400 rounded-r-md p-2"
+                    <input id="qiymet2" class="w-1/2 focus:outline-none hover:border hover:border-gray-400 rounded-r-md p-2"
                         placeholder="maks." />
                 </div>
                 <div class="flex w-1/4 ml-4">
-                    <select id="currencySelect" onchange="filterCars()"
+                    <select id="currencySelect"
                         class=" pl-1 border border-gray-300 w-1/3 hover:border-gray-400 focus:outline-none rounded-md">
                     </select>
                     <button
@@ -221,7 +221,7 @@
                         Barter
                     </button>
                 </div>
-                <select id="banSelect" onchange="filterCars()"
+                <select id="banSelect"
                     class="pl-2 border border-gray-300 hover:border-gray-400 w-1/4 ml-4 focus:outline-none rounded-md">
                 </select>
                 <div class=" flex border border-gray-300 rounded-md w-1/4 ml-4">
@@ -235,7 +235,7 @@
                 <p class="my-2">Bu gun: <span class="text-blue-500">1549 yeni elan</span></p>
                 <div class="flex justify-center items-center">
                     <a href="#" class="pr-8 text-[#999] hover:text-red-500" onclick="clearFilter()">Sıfırla</a>
-                    <button type="button"
+                    <button type="button" onclick="show()"
                         class="focus:outline-none text-white bg-[#ca1016] hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 my-4 ml-auto">Elanları
                         göstər</button>
                 </div>
@@ -245,7 +245,7 @@
         <div id="elanlar">
             <h2 class="uppercase p-4 font-bold  max-w-screen-lg mx-auto">Elanlar</h2>
             <div class=" bg-[#f6f7fa] py-8 px-4 ">
-                <div id="card" class="flex flex-wrap  max-w-screen-lg mx-auto justify-center sm:justify-evenly">
+                <div id="cards" class="flex flex-wrap  max-w-screen-lg mx-auto justify-center sm:justify-evenly">
 
                 </div>
             </div>
